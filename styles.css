@@ -38,6 +38,7 @@
     display: flex;
     justify-content: baseline;
     align-items: center;
+    margin-left: 50px;
 }
 
 .logo-text{
