@@ -7,7 +7,7 @@
     font-family: "Be Vietnam Pro", sans-serif;
     scroll-behavior: smooth;
 }
-
+/* //pending overflow property */
 body {
     overflow-x: hidden;
     overflow-y: auto;
@@ -18,7 +18,7 @@ body {
 }
 
 #home{
-  background: linear-gradient(135deg, #a8ff78, #78ffd6);
+   background: linear-gradient(135deg, #a8ff78, #78ffd6);
    width: 100vw;
 }
 
@@ -33,9 +33,48 @@ body {
     align-items: center;
     padding-top: 1rem;
 }
+/* Hamburger Menu Icon styles */
+.nav-toggle {
+    display: none;
+    cursor: pointer;
+    padding: 10px;
+    background: transparent;
+    border: none;
+    position: relative;
+    z-index: 1000;
+}
+
+.bar {
+    width: 30px;
+    height: 3px;
+    background-color: #333;
+    margin: 6px 0;
+    transition: 0.4s;
+}
+.bar {
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.bar.rotate:nth-child(1) {
+    transform: rotate(-45deg) ;
+    top: 20px;
+    right: 20px;
+}
+
+.bar.rotate:nth-child(3) {
+    transform: rotate(45deg) ;
+    top: 20px;
+    right: 20px;
+}
+
+.bar.fade:nth-child(2) {
+    opacity: 0;
+}
+
 
 .logo{
     width:80px;
+    border-radius: 10px;
 }
 
 .logo-container{
@@ -444,7 +483,25 @@ a{
       width: 100%;
   }
 }
-
+/* Media query for mobile */
+@media screen and (max-width: 600px) {
+    .nav-toggle {
+        display: block;
+    }
+    .nav-items {
+        display: none;
+        flex-direction: column;
+        background-color: #f9f9f9;
+        padding: 10px;
+    }
+    .nav-items.active {
+        display: flex;
+    }
+   /* 
+      .logo-text {
+        opacity: 0;
+    } */
+}
 @media only screen and (max-width: 600px) {
   /* Add styles for extra small devices here */
   #contact {

@@ -24,18 +24,20 @@
         <div id="wrapper">
 
             <div class="navbar">
- 
-               <div class="logo-container">
-                  <img src="userAsset/harshlogo.jpg" class="logo">
-                  <div class="logo-text">arsh Mahalle</div>
-               </div>
- 
-               <div class="nav-items">
-                   <div><a href="#projects">Projects</a></div>
-                   <div><a href="https://leetcode.com/u/mahalleharsh9/" target="_blank">Problem Solving</a></div>
-                   <div><a href="#contactme">Contact Me</a></div>
-               </div>
- 
+                <div class="logo-container">
+                    <img src="userAsset/harshlogo.jpg" class="logo">
+                    <!-- <div class="logo-text">arsh Mahalle</div>-->
+                </div>
+                <div class="nav-toggle" onclick="toggleNav()">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+                <div class="nav-items">
+                    <div><a href="#projects">Projects</a></div>
+                    <div><a href="https://leetcode.com/u/mahalleharsh9/" target="_blank">Problem Solving</a></div>
+                    <div><a href="#contactme">Contact Me</a></div>
+                </div>
             </div>
  
             <div class="hero-section">
@@ -519,12 +521,12 @@
             <h1 class="contactus-heading">Drop Me A Line!</h1>
             <h3 class="contactus-sub-heading">Spill The Beans, Share Your Thoughts?</h3>
             <div>
-                <form action="mailto:mahalleharsh9@gmail.com" method="post" enctype="text/plain">
+                <form id="contact-form">
                     <div class="formfield-container">
-                        <input class="formfield" type="text" name="name" required placeholder="Enter your name">
-                        <input class="formfield" type="email" name="email" required placeholder="Enter your email address">
-                        <input class="formfield" type="text" name="subject" required placeholder="Subject">
-                        <textarea class="formfield formfield-textarea" name="message" required placeholder="Enter your message" cols="38" rows="10"></textarea>
+                        <input class="formfield" type="text" name="entry.1234567890" required placeholder="Enter your name">
+                        <input class="formfield" type="email" name="entry.0987654321" required placeholder="Enter your email address">
+                        <input class="formfield" type="text" name="entry.1122334455" required placeholder="Subject">
+                        <textarea class="formfield formfield-textarea" name="entry.6677889900" required placeholder="Enter your message" cols="38" rows="10"></textarea>
                     </div>
                     <button type="submit" class="btn-pink" id="submit-btn">
                         Send Message <i class="submit-icon fa-solid fa-paper-plane"></i>
@@ -623,6 +625,53 @@
             } else {
                 alert("Failed to send message. Please try again later.");
             }
+        });
+    });
+    </script>
+
+    <script>
+
+            function toggleNav() {
+                const navItems = document.querySelector('.nav-items');
+                const bars = document.querySelectorAll('.bar');
+
+                // Toggle active class on navItems to show/hide the menu
+                navItems.classList.toggle('active');
+
+                // Toggle the appearance of the bars to show/hide the X icon
+                bars.forEach((bar, index) => {
+                    if (index === 0 || index === 2) {
+                        bar.classList.toggle('rotate');
+                    } else {
+                        bar.classList.toggle('fade');
+                    }
+                });
+            }
+
+    </script>
+
+    <script>
+      document.getElementById('contact-form').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const form = event.target;
+        const formData = new FormData(form);
+
+        const data = new URLSearchParams();
+        for (const pair of formData) {
+            data.append(pair[0], pair[1]);
+        }
+
+        fetch('https://docs.google.com/forms/d/e/1FAIpQLSfwwlPb9iSJLJGX6VB7Nl6qyL0jS2EfhUmSFop0U72jKNm2pg/formResponse', {
+            method: 'POST',
+            body: data,
+            mode: 'no-cors'
+        }).then(() => {
+            alert('Your message has been sent!');
+            form.reset();
+        }).catch((error) => {
+            alert('There was an error submitting your message.');
+            console.error('Error:', error);
         });
     });
     </script>
